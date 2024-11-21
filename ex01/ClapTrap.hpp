@@ -18,6 +18,7 @@ protected:
 
 public:
 	ClapTrap();
+	ClapTrap(const std::string &name);
 	ClapTrap(const std::string &name, long long hit, long long energy, long long damage);
 	ClapTrap(const ClapTrap& original);
 	~ClapTrap();

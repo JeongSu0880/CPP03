@@ -7,6 +7,12 @@ ClapTrap::ClapTrap() : name("No name"), energyPoint(10), attackDamage(0), maxHit
 	this->hitPoint = maxHit;
 }
 
+ClapTrap::ClapTrap(const std::string &name) : name(name), energyPoint(10), attackDamage(0), maxHit(10) {
+	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
+
+	this->hitPoint = maxHit;
+}
+
 ClapTrap::ClapTrap(const std::string &name, long long hit, long long energy, long long damage) : name(name), energyPoint(energy), attackDamage(damage), maxHit(hit) {
 	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
 	
