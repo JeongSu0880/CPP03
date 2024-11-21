@@ -1,13 +1,12 @@
 #include "ClapTrap.hpp"
 
 /*OCCF 구현부*/
-ClapTrap::ClapTrap() : name("No name"), hitPoint(MAX_POINT), energyPoint(MAX_POINT), attackDamage(MAX_POINT){
+ClapTrap::ClapTrap() : name("No name"), hitPoint(MAX_POINT), energyPoint(MAX_POINT), attackDamage(0){
 	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string &name) : name(name), hitPoint(MAX_POINT), energyPoint(MAX_POINT), attackDamage(MAX_POINT) {
+ClapTrap::ClapTrap(const std::string &name) : name(name), hitPoint(MAX_POINT), energyPoint(MAX_POINT), attackDamage(0) {
 	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
-	this->name = name;
 }
 
 ClapTrap::~ClapTrap() {
@@ -32,8 +31,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap& original) {
 
 /*subject 요구 함수 구현부*/
 void ClapTrap::attack(const std:: string& target) {
-	if (this->energyPoint <= MIN_POINT) {
-		std::cout << name << " has failed to attack. " << "Out of energy!" << std::endl;
+	if (this->energyPoint <= MIN_POINT || this->hitPoint <= MIN_POINT) {
 		return;
 	}
 
@@ -44,7 +42,7 @@ void ClapTrap::attack(const std:: string& target) {
 
 void ClapTrap::takeDamage(unsigned int amount) {
 	//더 감소할 damage가 안남았을때는 그냥 return
-	if (this->hitPoint == 0) {
+	if (this->hitPoint == MIN_POINT || this->energyPoint <= MIN_POINT) {
 		return;
 	}
 
@@ -55,8 +53,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	if (this->energyPoint <= MIN_POINT) {
-		std::cout << name << " has failed to repair. " << "Out of energy!" << std::endl;
+	if (this->energyPoint <= MIN_POINT || this->hitPoint <= MIN_POINT) {
 		return;
 	}
 

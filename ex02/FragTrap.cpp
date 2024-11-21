@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap() { 
+FragTrap::FragTrap() : ClapTrap("No name", 100, 100, 30) { 
 	std::cout << "FragTrap " << this->name << " has been created!" << std::endl;
 }
 
@@ -24,11 +24,15 @@ FragTrap &FragTrap::operator=(const FragTrap &original) {
 		this->hitPoint = original.getHitPoint();
 		this->energyPoint = original.getEnergyPoint();
 		this->attackDamage = original.getAttackDamage();
+		this->maxHit = original.maxHit;
 	}
 
 	return *this;
 }
 
 void FragTrap::highFivesGuys() {
+	if (this->energyPoint <= MIN || this->hitPoint <= MIN) {
+		return;
+	}
 	std::cout << "FragTrap " << name << " high five!" << std::endl;
 }

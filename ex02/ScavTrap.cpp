@@ -24,6 +24,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &original) {
 		this->hitPoint = original.getHitPoint();
 		this->energyPoint = original.getEnergyPoint();
 		this->attackDamage = original.getAttackDamage();
+		this->maxHit = original.maxHit;
 	}
 
 	return *this;
@@ -42,5 +43,8 @@ void	ScavTrap::attack(const std::string &target) {
 }
 
 void ScavTrap::guardGate() {
+	if (this->energyPoint <= MIN || this->hitPoint <= MIN) {
+		return;
+	}
 	std::cout << "ScavTrap " << name << " is now in Gatekeeper mode!" << std::endl;
 }

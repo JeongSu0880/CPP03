@@ -25,7 +25,7 @@ int main() {
     FragTrap1.takeDamage(50);
     ScavTrap1.takeDamage(50);
 
-	/*둘 다 energy -3 (attack, repair, repair)*/
+	/*둘 다 energy -2*/
 	std::cout << "FragTrap :: " << FragTrap1.getEnergyPoint() << std::endl;
 	std::cout << "ScavTrap :: " << ScavTrap1.getEnergyPoint() << std::endl;
 

@@ -15,12 +15,10 @@ protected:
 	long long	attackDamage;
 
 	long long	maxHit;
-	long long	maxEnergy;
-	long long	damage;
 
 public:
 	ClapTrap();
-	ClapTrap(const std::string &name, long long maxHit, long long maxEnergy, long long damage);
+	ClapTrap(const std::string &name, long long hit, long long energy, long long damage);
 	ClapTrap(const ClapTrap& original);
 	~ClapTrap();
 

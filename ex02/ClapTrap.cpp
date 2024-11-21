@@ -1,20 +1,16 @@
 #include "ClapTrap.hpp"
 
 /*OCCF 구현부*/
-ClapTrap::ClapTrap() : name("No name"), maxHit(100), maxEnergy(100), damage(30){
+ClapTrap::ClapTrap() : name("No name"), energyPoint(10), attackDamage(0), maxHit(10){
 	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
 
 	this->hitPoint = maxHit;
-	this->energyPoint = maxEnergy;
-	this->attackDamage = damage;
 }
 
-ClapTrap::ClapTrap(const std::string &name, long long maxHit, long long maxEnergy, long long damage) : name(name), maxHit(maxHit), maxEnergy(maxEnergy), damage(damage) {
+ClapTrap::ClapTrap(const std::string &name, long long hit, long long energy, long long damage) : name(name), energyPoint(energy), attackDamage(damage), maxHit(hit) {
 	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
 	
 	this->hitPoint = maxHit;
-	this->energyPoint = maxEnergy;
-	this->attackDamage = damage;
 }
 
 ClapTrap::~ClapTrap() {
@@ -32,15 +28,15 @@ ClapTrap &ClapTrap::operator=(const ClapTrap& original) {
 		this->hitPoint = original.getHitPoint();
 		this->energyPoint = original.getEnergyPoint();
 		this->attackDamage = original.getAttackDamage();
+		this->maxHit = original.maxHit;
 	}
 
 	return *this;	
 }
 
 /*subject 요구 함수 구현부*/
-void ClapTrap::attack(const std:: string& target) {
-	if (this->energyPoint <= MIN) {
-		std::cout << name << " has failed to attack. " << "Out of energy!" << std::endl;
+void ClapTrap::attack(const std::string& target) {
+	if (this->energyPoint <= MIN || this->hitPoint <= MIN) {
 		return;
 	}
 
@@ -51,7 +47,7 @@ void ClapTrap::attack(const std:: string& target) {
 
 void ClapTrap::takeDamage(unsigned int amount) {
 	//더 감소할 damage가 안남았을때는 그냥 return
-	if (this->hitPoint == MIN) {
+	if (this->hitPoint == MIN || this->energyPoint <= MIN) {
 		return;
 	}
 
@@ -62,8 +58,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	if (this->energyPoint <= MIN) {
-		std::cout << name << " has failed to repair. " << "Out of energy!" << std::endl;
+	if (this->energyPoint <= MIN || this->hitPoint <= MIN) {
 		return;
 	}
 
