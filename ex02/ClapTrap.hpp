@@ -5,9 +5,6 @@
 # include <string>
 
 # define MIN 0
-# define MAX_HIT 100 
-# define MAX_ENERGY 50
-# define DAMAGE 20
 
 class ClapTrap
 {
@@ -17,9 +14,13 @@ protected:
 	long long	energyPoint;
 	long long	attackDamage;
 
+	long long	maxHit;
+	long long	maxEnergy;
+	long long	damage;
+
 public:
 	ClapTrap();
-	ClapTrap(const std::string &name);
+	ClapTrap(const std::string &name, long long maxHit, long long maxEnergy, long long damage);
 	ClapTrap(const ClapTrap& original);
 	~ClapTrap();
 

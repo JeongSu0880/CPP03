@@ -4,7 +4,7 @@ ScavTrap::ScavTrap() : ClapTrap() {
 	std::cout << "ScavTrap " << this->name << " has been created!" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name) {
+ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name, 100, 50, 20) {
 	std::cout << "ScavTrap " << this->name << " has been created!" << std::endl;
 }
 

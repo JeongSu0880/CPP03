@@ -1,12 +1,14 @@
 #include "ClapTrap.hpp"
 
 /*OCCF 구현부*/
-ClapTrap::ClapTrap() : name("No name"), hitPoint(MAX_POINT), energyPoint(MAX_POINT), attackDamage(MAX_POINT){}
-
-ClapTrap::ClapTrap(const std::string &name) : hitPoint(MAX_POINT), energyPoint(MAX_POINT), attackDamage(MAX_POINT) {
+ClapTrap::ClapTrap() : name("No name"), hitPoint(MAX_HIT), energyPoint(MAX_ENERGY), attackDamage(DAMAGE){
 	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
-	this->name = name;
 }
+
+ClapTrap::ClapTrap(const std::string &name) : name(name), hitPoint(MAX_HIT), energyPoint(MAX_ENERGY), attackDamage(DAMAGE) {
+	std::cout << "ClapTrap " << name << " has been created!" << std::endl;
+}
+
 
 ClapTrap::~ClapTrap() {
 	std::cout << "ClapTrap " << name << " has been destroyed!" << std::endl;
@@ -30,7 +32,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap& original) {
 
 /*subject 요구 함수 구현부*/
 void ClapTrap::attack(const std:: string& target) {
-	if (this->energyPoint <= MIN_POINT) {
+	if (this->energyPoint <= MIN) {
 		std::cout << name << " has failed to attack. " << "Out of energy!" << std::endl;
 		return;
 	}
@@ -42,28 +44,28 @@ void ClapTrap::attack(const std:: string& target) {
 
 void ClapTrap::takeDamage(unsigned int amount) {
 	//더 감소할 damage가 안남았을때는 그냥 return
-	if (this->hitPoint == 0) {
+	if (this->hitPoint == MIN) {
 		return;
 	}
 
 	long long tmpPoint = this->hitPoint - amount;
-	this->hitPoint = (tmpPoint <= MIN_POINT) ? MIN_POINT : tmpPoint;
+	this->hitPoint = (tmpPoint <= MIN) ? MIN : tmpPoint;
 
 	std::cout << name << " takes " << amount << " damage! " << name << " has " << this->hitPoint << " hit points remaining." << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	if (this->energyPoint <= MIN_POINT) {
+	if (this->energyPoint <= MIN) {
 		std::cout << name << " has failed to repair. " << "Out of energy!" << std::endl;
 		return;
 	}
 
-	if (this->hitPoint == MAX_POINT) {
+	if (this->hitPoint == MAX_HIT) {
 		return;
 	}
 
 	long long tmpPoint = this->hitPoint + amount;
-	this->hitPoint = (tmpPoint >= MAX_POINT) ? MAX_POINT : tmpPoint;
+	this->hitPoint = (tmpPoint >= MAX_HIT) ? MAX_HIT : tmpPoint;
 
 	--(this->energyPoint);
 
